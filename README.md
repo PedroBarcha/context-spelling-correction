@@ -2,12 +2,12 @@
 Currently, the program wraps single or several text files into 8 words blocks, query them to yandex and if it suggests a spell correction (like google's "did you mean"), then the original phrase is subtituted by the given suggestion. Otherwise, the phrase reamins the same in the file.
 
 ## USAGE
-1. Get an API Key at https://console.developers.google.com/apis/credentials
+1. Get an API Key at https://tech.yandex.com/xml/
 2. Put your API key inside the brackets  in "API_key" field, at spellchecker.py file. Also put your username right bellow, at "user".
 3. From the terminal, run inside the programs's directory: python main.py
 
 ## IMPORTANT
-	Before using the program, always make sure that you have your correct IP set at https://xml.yandex.com/settings/
+Before using the program, always make sure that you have your correct IP set at https://xml.yandex.com/settings/
 
 ## NOTES
 - According to the API's doc., you need to convert special chars in escape sequences.
