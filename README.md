@@ -4,17 +4,24 @@ Currently, the program wraps single or several text files into 8 words blocks, q
 ## USAGE
 1. Get an API Key at https://tech.yandex.com/xml/
 2. Put your API key inside the brackets  in "API_key" field, at spellchecker.py file. Also put your username right bellow, at "user".
-3. From the terminal, run inside the programs's directory: python main.py
+3. From the terminal, run inside the programs's directory: python correction.py PATH_TO_THE_FILE
+If you wish to correct several files, stored in the same directory, use instead: PATH_TO_THE_DIR/*
 
 ## IMPORTANT
-Before using the program, always make sure that you have your correct IP set at https://xml.yandex.com/settings/
+Before running the program, always make sure that you have your correct IP set at https://xml.yandex.com/settings/
+
+## OUTPUT
+- For every file specified in the input, a file with the same name and extension ".corrected" will be generated.
+- A single file named "corrected_queries.txt" is produced, containing all of Yandex's suggestions for you file(s)
+and also runtime statistics at the end of it.
 
 ## NOTES
-- According to the API's doc., you need to convert special chars in escape sequences.
+- According to the API's doc., you need to convert special chars into escape sequences.
 However, the result of Yandex's spell check field (<text> in XML) is ASCII (bug?), not UTF8. So, we don't make
 the conversion of the queries before sending them simply because it doesn't matter for us.
-What this means is: any UTF8 char in your text will be rounded to ASCII (e.g: 	“ and ” turn to ". Also, — will become -).
-Unfortunately nothing can be done about it, since it is ans API issue.
+What this means is: any UTF8 char in your text will be rounded to ASCII if a suggestion is made by Yandex.
+(e.g: “ and ” turn to ". Also, — will become -).
+Unfortunately nothing can be done about it, since it is an API issue.
 - Book pages often contain hyphen (-) linking parts of a single word, when it reaches the end of a line. In cases like this, Yandex usually suggests the whole word binded together(without the hyphen) as a spell correction. Eg: "unfor- tunate" becomes "unfortunate".
 If you don't want that, you can easily reprogram it to check if the query sent to Yandex, without the hyphen, provides the same result as Yandex's suggestion for it. If so, you can mantain the former query instead of the suggestion.
 

@@ -1,9 +1,27 @@
-import string
+''' 
+Context Spell Checker
+Copyright (C) 2017
 
-#Chops the given file into phrases with "chop_size" words, that will later be sent as queries to google,
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+'''
+
+#Chops the given file into phrases with "chop_size" words, that will later be sent as queries to yandex,
 #returning: list of phrases(strings).
 #Attention: chop is done according to spaces, so "would , you come, son?", yields:
-#[would],[,],[you],[come,],[son?].
+#[would],[,],[you],[come,],[son?]. However, those are 3 words only.
+
+import string
 
 def textWrap(file,chop_size):
 	chops_list=[]
@@ -14,13 +32,13 @@ def textWrap(file,chop_size):
 		for line in document:
 			for word in line.split(): #for every word
 				chop_aux.append(word)
-				if (word not in string.punctuation): #chopps with no words, like [,], don't account to chop_size
+				if (word not in string.punctuation): #chops with no words, like [,], don't account to chop_size
 					words_count=words_count+1
 				if (words_count == chop_size): #phrase complete => adds query to queries list
-					#bind words into a single string
+					#bind words that form the phrase into a single string
 					chop_aux=' '.join(chop_aux)
 
-					#if the words of the phrase aren't the last ones of the line, so it wont get binded to its neighbours in the final output
+					#adds space in the end of the phrase so it wont get binded to its neighbours in the final output
 					chop_aux=chop_aux+' '
 
 					#add query to queries list
