@@ -72,7 +72,6 @@ for filename in sys.argv[1:]:
 			with open (filename+".corrected", 'a') as file:
 				file.write(original_query)
 
-
 time2=time.time()
 
 #write runtime statistics in the corrections file
