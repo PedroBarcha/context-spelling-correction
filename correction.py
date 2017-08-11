@@ -20,9 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #suggests a spell correction (like google's "did you mean"), then the original phrase is
 #subtituted by the given suggestion. Otherwise, the phrase reamins the same in the file.
 
-import spellcheck
-import queryenhance
-import wrapper
+from lib import spellcheck, queryenhance, wrapper
 
 import glob
 import time
@@ -35,7 +33,7 @@ sys.setdefaultencoding('utf8')
 time1=time.time()
 total_queries=0
 yandex_suggestions=0
-corrections_file="corrected_queries.txt"
+corrections_file="yandex_suggestions.txt"
 
 #text will be chopped into block with words_per_query words
 words_per_query=8
