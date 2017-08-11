@@ -4,8 +4,8 @@ Currently, the program wraps single or several text files into 8 words blocks, q
 ## USAGE
 1. Get an API Key at https://tech.yandex.com/xml/ and confirm your cel number, in order to grant access to 10.000 quries/day.
 2. Put your API key inside the brackets  in "API_key" field, at spellchecker.py file. Also put your username right bellow, at "user".
-3. From the terminal, run inside the programs's directory: python correction.py PATH_TO_THE_FILE
-   If you wish to correct several files, stored in the same directory, use instead: PATH_TO_THE_DIR/*
+3. From the terminal, run inside the programs's directory: ``` python correction.py PATH_TO_THE_FILE ``` .
+	If you wish to correct several files, stored in the same directory, use instead: PATH_TO_THE_DIR/* 
 
 ## IMPORTANT
 Before running the program, always make sure that you have your correct IP set at https://xml.yandex.com/settings/
