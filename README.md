@@ -1,13 +1,17 @@
 ## THE PROJECT
 Currently, the program wraps single or several text files into 8 words blocks, query them to yandex and if it suggests a spell correction (like google's "did you mean"), then the original phrase is subtituted by the given suggestion. Otherwise, the phrase reamins the same in the file.
 
-## USAGE
-1. Get an API Key at https://tech.yandex.com/xml/ and confirm your cel number, in order to grant access to 10.000 quries/day.
-2. Put your API key inside the brackets  in "API_key" field, at spellchecker.py file. Also put your username right bellow, at "user".
-3. From the terminal, run inside the programs's directory: ``` python correction.py PATH_TO_THE_FILE ``` .
-	If you wish to correct several files, stored in the same directory, use instead: PATH_TO_THE_DIR/* 
+## SET UP
+1. Get an API Key at https://tech.yandex.com/xml/ ;
+2. In order to grant access to 10.000 quries/day, confirm your cel number at https://passport.yandex.com/profile ;
+3. Run ``` git clone https://github.com/PedroBarcha/Context-Spelling-Correction.git``` to clone the repo;
+4. From the terminal, navigate to the repo directory and run ``` python config.py ``` , in order to set you API key and username.
 
-## IMPORTANT
+## USAGE
+From the terminal, run inside the repo's directory: ``` python correction.py PATH_TO_THE_FILE ``` .
+If you wish to correct several files, stored in the same directory, use instead: ``` python correction.py PATH_TO_THE_DIR/* ``` .
+
+## ***IMPORTANT***
 Before running the program, always make sure that you have your correct IP set at https://xml.yandex.com/settings/
 
 ## OUTPUT

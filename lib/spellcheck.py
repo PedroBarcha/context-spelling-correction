@@ -23,12 +23,30 @@ import queryenhance
 import urllib2
 import xml.etree.ElementTree as ET
 import time
+import glob
 
-API_key="03.521135671:6bcae650bac36e850d21a09f20ff4e85"
-user="pphbc"
+def getUserInfos():
+	file=open("user_infos.txt",'r')
+	lines=file.readlines()
+	API_key=lines[0]
+	user=lines[1]
+
+	return API_key,user
 
 def spellCheck(query):
 	connected=None 
+
+	#try to get user infos. If there is none, exit program.
+	try:
+		API_key,user=getUserInfos()
+		#print "qqqqq"
+		print API_key
+		print user
+		print query
+		#print '\n'
+	except:
+		print ("No user infos found. Please run python config.py")
+		raise SystemExit
 
 	#try searching the query online until successful connection is stablished with Yandex's server
 	while not connected:
