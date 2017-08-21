@@ -1,1 +1,1 @@
-import queryenhance,spellcheck,wrapper
+from lib import *

@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #uses Yandex's API to check if the query returns any spell suggestion
 
-import queryenhance
+import stringenhance
 
 import urllib2
 import xml.etree.ElementTree as ET
@@ -29,6 +29,7 @@ def getUserInfos():
 	file=open("user_infos.txt",'r')
 	lines=file.readlines()
 	API_key=lines[0]
+	API_key=stringenhance.enhanceApiKey(API_key)
 	user=lines[1]
 
 	return API_key,user
@@ -39,11 +40,6 @@ def spellCheck(query):
 	#try to get user infos. If there is none, exit program.
 	try:
 		API_key,user=getUserInfos()
-		#print "qqqqq"
-		print API_key
-		print user
-		print query
-		#print '\n'
 	except:
 		print ("No user infos found. Please run python config.py")
 		raise SystemExit
@@ -67,7 +63,7 @@ def spellCheck(query):
 
 	#returns Yandex's suggestion if any or -1 otherwise
 	if (corrected_query):
-		corrected_query=queryenhance.enhanceSuggestion(corrected_query)
+		corrected_query=stringenhance.enhanceSuggestion(corrected_query)
 		return corrected_query
 	else:
 		return -1

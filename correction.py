@@ -20,17 +20,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #suggests a spell correction (like google's "did you mean"), then the original phrase is
 #subtituted by the given suggestion. Otherwise, the phrase reamins the same in the file.
 
-from lib import spellcheck, queryenhance, wrapper
+from lib import spellcheck, stringenhance, wrapper
 
 import glob
 import time
-import sys  
+import sys
 
 #set unicode as default encoding
 reload(sys)  
 sys.setdefaultencoding('utf8')
 
-time1=time.time()
+def printRuntime(corrections_file,runtime,total_queries,yandex_suggestions):
+	#write runtime statistics in the corrections file
+	with open (corrections_file, 'a') as f:
+		f.write ("Runtime:"+str(runtime))
+		f.write('\n')
+		f.write ("Queries sent to Yandex:"+str(total_queries))
+		f.write('\n')
+		f.write ("Corrected Queries:"+str(yandex_suggestions))
+
+initial_time=time.time()
 total_queries=0
 yandex_suggestions=0
 corrections_file="yandex_suggestions.txt"
@@ -49,7 +58,7 @@ for filename in sys.argv[1:]:
 	#checks every query online and substitutes the former phrases for yandex's suggestions, if any
 	for i in range (0,len(queries_list)):
 		original_query=queries_list[i]
-		queries_list[i]=queryenhance.enhanceQuery(queries_list[i]) #makes query ready for Yandex's search
+		queries_list[i]=stringenhance.enhanceQuery(queries_list[i]) #makes query ready for Yandex's search
 		corrected_queries.append(spellcheck.spellCheck(queries_list[i])) #consult Yandex API for spell checking
 
 		#if Yandex suggested any spell corrections regarding the original query
@@ -64,18 +73,11 @@ for filename in sys.argv[1:]:
 			with open (filename+".corrected", 'a') as file:
 				file.write(corrected_queries[i])
 		else:
-			#as there were no corrections to be done in the phrase, write it in the in the corrected
+			#as there were no corrections to be done in the phrase, write it in the corrected
 			#version of the file that is being spell checked
-			original_query=queryenhance.enhanceOriginalQuery(original_query)
+			original_query=stringenhance.enhanceOriginalQuery(original_query)
 			with open (filename+".corrected", 'a') as file:
 				file.write(original_query)
 
-time2=time.time()
-
-#write runtime statistics in the corrections file
-with open (corrections_file, 'a') as f:
-	f.write ("Runtime:"+str(time2-time1))
-	f.write('\n')
-	f.write ("Queries sent to Yandex:"+str(total_queries))
-	f.write('\n')
-	f.write ("Corrected Queries:"+str(yandex_suggestions))
+final_time=time.time()
+printRuntime(corrections_file,final_time-initial_time,total_queries,yandex_suggestions)

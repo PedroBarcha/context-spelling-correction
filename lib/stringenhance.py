@@ -43,6 +43,10 @@ def enhanceOriginalQuery(query):
 	query=query.replace("\n ",'\n') #sometines '\n'+space is generated due to the spaces added by the wrapper
 	return query
 
+def enhanceApiKey(API_Key):
+	API_Key=API_Key.replace('\n','')
+	return API_Key
+
 #sometimes yandex returns its suggestion inside parenthesis (not sure why tho), so we need to remove them
 def parenthesisTrim(text):
 	text = re.sub('[()]', '', text)
