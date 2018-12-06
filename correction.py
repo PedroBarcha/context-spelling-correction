@@ -45,7 +45,7 @@ yandex_suggestions=0
 corrections_file="yandex_suggestions.txt"
 
 #text will be chopped into block with words_per_query words
-words_per_query=8
+words_per_query=4
 
 #for every file specified in the terminal input
 for filename in sys.argv[1:]:
@@ -58,8 +58,10 @@ for filename in sys.argv[1:]:
 	#checks every query online and substitutes the former phrases for yandex's suggestions, if any
 	for i in range (0,len(queries_list)):
 		original_query=queries_list[i]
-		queries_list[i]=stringenhance.enhanceQuery(queries_list[i]) #makes query ready for Yandex's search
-		corrected_queries.append(spellcheck.spellCheck(queries_list[i])) #consult Yandex API for spell checking
+		#makes query ready for Yandex's search
+		queries_list[i]=stringenhance.enhanceQuery(queries_list[i])
+		#consult Yandex API for spell checking
+		corrected_queries.append(spellcheck.spellCheck(queries_list[i]))
 
 		#if Yandex suggested any spell corrections regarding the original query
 		if (corrected_queries[i]!=-1):
@@ -73,11 +75,10 @@ for filename in sys.argv[1:]:
 			with open (filename+".corrected", 'a') as file:
 				file.write(corrected_queries[i])
 		else:
-			#as there were no corrections to be done in the phrase, write it in the corrected
-			#version of the file that is being spell checked
+			#as there were no corrections to be done in the phrase, write it in the corrected version of the file that is being spell checked
 			original_query=stringenhance.enhanceOriginalQuery(original_query)
 			with open (filename+".corrected", 'a') as file:
 				file.write(original_query)
 
-final_time=time.time()
-printRuntime(corrections_file,final_time-initial_time,total_queries,yandex_suggestions)
+elapsed_time=time.time()-initial_time
+printRuntime(corrections_file,elapsed_time,total_queries,yandex_suggestions)

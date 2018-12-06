@@ -22,7 +22,6 @@ import stringenhance
 
 import urllib2
 import xml.etree.ElementTree as ET
-import time
 import glob
 
 def getUserInfos():
@@ -50,8 +49,13 @@ def spellCheck(query):
 			search_result=urllib2.urlopen("https://yandex.com/search/xml?user="+user+"&key="+API_key+"&query="+query).read()
 			connected=True
 		except:
-			print "Couldn't connect to Yandex's server. Trying again..."
+			print ("Couldn't connect to Yandex's server. Trying again...")
 			pass
+
+	#check if Yandex recognized your IP address
+	if "list of permitted IP addresses" in search_result:
+		print ("You need to update your IP addres at https://xml.yandex.com/settings/")
+		raise SystemExit
 
 	#get the root of the XML returned from the query
 	root=ET.fromstring(search_result)

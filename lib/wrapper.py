@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #Chops the given file into phrases with "chop_size" words, that will later be sent as queries to yandex,
 #returning: list of phrases(strings).
 #Attention: chop is done according to spaces, so "would , you come, son?", yields:
-#[would],[,],[you],[come,],[son?]. However, those are 3 words only.
+#[would],[,],[you],[come,],[son?]. However, those are 4 words only.
 
 import string
 
@@ -30,11 +30,14 @@ def textWrap(file,chop_size):
 
 	with open (file, 'r') as document:
 		for line in document:
-			for word in line.split(): #for every word
+			#for every word
+			for word in line.split():
 				chop_aux.append(word)
-				if (word not in string.punctuation): #chops with no words, like [,], don't account to chop_size
+				#chops with no words, like [,], don't account to chop_size
+				if (word not in string.punctuation): 
 					words_count=words_count+1
-				if (words_count == chop_size): #phrase complete => adds query to queries list
+				#phrase complete => adds query to queries list
+				if (words_count == chop_size): 
 					#bind words that form the phrase into a single string
 					chop_aux=' '.join(chop_aux)
 

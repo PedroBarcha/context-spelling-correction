@@ -1,6 +1,9 @@
 ## THE PROJECT
 Currently, the program wraps single or several text files into 8 words blocks, query them to yandex and if it suggests a spell correction (like google's "did you mean"), then the original phrase is subtituted by the given suggestion. Otherwise, the phrase reamins the same in the file.
 
+## DEPENDECIES
+All you need is python 2 and its standard libraries.
+
 ## SET UP
 1. Get an API Key at https://tech.yandex.com/xml/ ;
 2. In order to grant access to 10.000 quries/day, confirm your cel number at https://passport.yandex.com/profile ;
