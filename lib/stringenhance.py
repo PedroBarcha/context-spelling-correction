@@ -25,7 +25,8 @@ import re
 
 #enhance the query in order to adequate it to yandex's search
 def enhanceQuery(query):
-	query=query.replace("\n ",'\n') #sometines '\n'+space is generated due to the spaces added by the wrapper
+	query=query.replace(" \n ",'\n') #sometines '\n'+space is generated due to the spaces added by the wrapper
+	query=query.replace("\n ",'\n')
 	query=query.replace(" ",'+') #backspaces need to be replaced by +
 	query=query.replace('\n',';~;') #yandex api doesn't support \n, so we have to hide it (using a set of chars that is unlikely to appear in any text)
 	query=parenthesisHide(query) #hide query's original parenthesis

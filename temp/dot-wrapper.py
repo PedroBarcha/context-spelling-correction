@@ -12,19 +12,15 @@ def textWrap(file):
 	with open (file, 'r') as document:
 		for line in document:
 			for word in line.split():
-				print("word: "+word)
 				chop_aux.append(word)
 
 				#punctuation in the word =>end of query 
 				if (re.search('\W',word) is not None):
-					print("pontuacao: "+word)
-					#add query to queries list
-					chops_list.append(chop_aux)
-
 					#bind words that form the phrase into a single string
 					chop_aux=' '.join(chop_aux)
 
 					#adds space in the end of the phrase so it wont get binded to its neighbours in the final output
+					#!!!! ESPACO A MASI NO FINAL
 					chop_aux=chop_aux+' '
 
 					#add query to queries list
@@ -36,11 +32,11 @@ def textWrap(file):
 					words_count=0
 
 			chop_aux.append('\n') #end of line
+			#ESPACO ANTES E DEPOIS
 
 	#!!!TA ENTRANDO COM CHOP_AUX TENDO SO \N
 	#add last words of the file to the chop list (as those might still not be there, because there wasn't a final puctuation)
-	if (chop_aux):
-		print ("tratando dos bufferizado: "+str(chop_aux))
+	if (chop_aux and chop_aux!=['\n']):
 		#removes extra \n that was previously added to the end of the very last line of the file
 		chop_aux.pop()
 		#!!!E SE NAO TIVER NENHUMA PONTUACAO NO ARQUIVO???????
@@ -48,6 +44,7 @@ def textWrap(file):
 		chop_aux=' '.join(chop_aux)
 		chops_list.append(chop_aux)
 	
+	print ("chop_list: "+str(chops_list))
 	return chops_list
 
 
