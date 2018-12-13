@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #subtituted by the given suggestion. Otherwise, the phrase reamins the same in the file.
 
 from lib import spellcheck, stringenhance, wrapper
-
+from temp import dotwrapper
 import glob
 import time
 import sys
@@ -52,7 +52,8 @@ for filename in sys.argv[1:]:
 	corrected_queries=[]
 
 	#wrap file into several phrases
-	queries_list=wrapper.textWrap(filename,words_per_query)
+	#queries_list=wrapper.textWrap(filename,words_per_query)
+	queries_list=dotwrapper.textWrap(filename)
 	total_queries=total_queries+len(queries_list)
 
 	#checks every query online and substitutes the former phrases for yandex's suggestions, if any
@@ -79,6 +80,8 @@ for filename in sys.argv[1:]:
 			original_query=stringenhance.enhanceOriginalQuery(original_query)
 			with open (filename+".corrected", 'a') as file:
 				file.write(original_query)
+
+print(filename+" corrected.\n")
 
 elapsed_time=time.time()-initial_time
 printRuntime(corrections_file,elapsed_time,total_queries,yandex_suggestions)

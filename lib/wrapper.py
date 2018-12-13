@@ -57,7 +57,7 @@ def textWrap(file,chop_size):
 	#add last words of the file to the chop list (as those altogether didn't reach chop_size)
 	if (words_count != 0):
 		#removes extra \n that was previously added to the end of the very last line of the file
-		chop_aux.pop()
+		#chop_aux.pop()
 
 		#adds last words to chop list
 		chop_aux=' '.join(chop_aux)
