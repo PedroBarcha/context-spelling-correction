@@ -25,7 +25,7 @@ import re
 
 #enhance the query in order to adequate it to yandex's search
 def enhanceQuery(query):
-	query=query.replace(" \n ",'\n') #sometines '\n'+space is generated due to the spaces added by the wrapper
+	query=query.replace(" \n ",'\n') #sometines ' \n' is generated due to the spaces added by the wrapper
 	query=query.replace("\n ",'\n')
 	query=query.replace(" ",'+') #backspaces need to be replaced by +
 	query=query.replace('\n',';~;') #yandex api doesn't support \n, so we have to hide it (using a set of chars that is unlikely to appear in any text)
@@ -53,8 +53,7 @@ def parenthesisTrim(text):
 	text = re.sub('[()]', '', text)
 	return text
 
-#we need to hide query's parenthesis so we don't confuse them with those yielded by Yandex's suggestions, as mentioned above.
-#we do that by replacing them with a set of chars that is unlikely to appear in any text
+#we need to hide query's parenthesis so we don't confuse them with those yielded by Yandex's suggestions, as mentioned above.we do that by replacing them with a set of chars that is unlikely to appear in any text
 def parenthesisHide(text):
 	text=text.replace('(','~;~')
 	text=text.replace(')',';0;')

@@ -15,7 +15,7 @@ def textWrap(file):
 				chop_aux.append(word)
 
 				#punctuation in the word =>end of query 
-				if (re.search('\W',word) is not None):
+				if (re.search('[.,]',word) is not None):
 					#bind words that form the phrase into a single string
 					chop_aux=' '.join(chop_aux)
 
@@ -32,14 +32,12 @@ def textWrap(file):
 					words_count=0
 
 			chop_aux.append('\n') #end of line
-			#ESPACO ANTES E DEPOIS
 
-	#!!!TA ENTRANDO COM CHOP_AUX TENDO SO \N
 	#add last words of the file to the chop list (as those might still not be there, because there wasn't a final puctuation)
 	if (chop_aux and chop_aux!=['\n']):
 		#removes extra \n that was previously added to the end of the very last line of the file
 		chop_aux.pop()
-		#!!!E SE NAO TIVER NENHUMA PONTUACAO NO ARQUIVO???????
+		
 		#adds last words to chop list
 		chop_aux=' '.join(chop_aux)
 		chops_list.append(chop_aux)
